@@ -15,5 +15,5 @@ pip install -r requirements.txt
 ### Run script
 
 source venv/bin/activate
-python [-i] process_statements <path>
+python [-i] process_statements --parent_path <path> [--write_out]
 
