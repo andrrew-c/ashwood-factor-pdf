@@ -1,3 +1,4 @@
+import os
 import argparse
 
 import pandas as pd
@@ -14,7 +15,10 @@ parser = argparse.ArgumentParser(description="Process PDF statements")
 
 # Set up arguments
 
-parser.add_argument('parent_folder', type=str, help='Full path where statements are held')
+parser.add_argument('--parent_folder', type=str, help='Full path where statements are held')
+parser.add_argument('--write_out',
+                        help='Writes out with name statements.xlsx if True',
+                        action='store_true')
 
 # Get command line arguments
 args = parser.parse_args()
@@ -28,5 +32,6 @@ if __name__ == "__main__":
     # Get df (list of dataframes)
     df = pd.concat([process_single_pdf(path) for path in paths])
 
-   
+    if args.write_out:
+        df.to_excel(os.path.join(args.parent_folder,'factor_statements.xlsx'))
     
